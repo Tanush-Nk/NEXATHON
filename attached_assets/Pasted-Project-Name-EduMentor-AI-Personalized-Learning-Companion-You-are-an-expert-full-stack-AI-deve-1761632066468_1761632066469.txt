@@ -1,0 +1,233 @@
+Project Name: EduMentor AI – Personalized Learning Companion
+
+> You are an expert full-stack AI developer.
+Build a complete, working full-stack web app scaffold for a hackathon idea called EduMentor AI, an AI-powered personalized learning companion that provides adaptive quizzes, gamified progress tracking, and AI-driven study support.
+
+
+
+
+---
+
+🎯 Core Objectives
+
+1. AI Chat Assistant
+
+Chat interface where students can ask study questions.
+
+Uses OpenAI API (or mock AI) to answer and generate adaptive quizzes.
+
+
+
+2. Adaptive Quiz Generator
+
+Generates questions based on the user’s performance (easy → hard).
+
+Recommendation Engine uses accuracy and pace to adjust difficulty.
+
+
+
+3. Progress Tracking & Analytics
+
+Stores user progress (accuracy, XP, badges, streaks) in MongoDB.
+
+Visualizes performance on a dashboard using charts.
+
+
+
+4. Gamification
+
+XP points, levels, badges, and daily streak tracking.
+
+Encourages consistent engagement and learning motivation.
+
+
+
+
+
+---
+
+⚙ Tech Stack
+
+Layer	Technology	Description
+
+Frontend	React.js + TailwindCSS	Chat + dashboard UI
+Backend	Flask (Python)	REST API, AI logic, and MongoDB integration
+Database	MongoDB (via PyMongo / Flask-PyMongo)	Stores user profiles, quiz data, and progress
+AI Engine	OpenAI API (GPT-4/5) or mock model	Generates questions & explanations
+Charts	Recharts / Chart.js	For progress visualization
+Deployment	Render / Vercel / MongoDB Atlas	Cloud-ready for hackathons
+
+
+
+---
+
+🧱 File & Folder Structure
+
+EduMentor-AI/
+│
+├── backend/
+│   ├── app.py                     # Flask main entry point
+│   ├── routes/
+│   │   ├── chat.py                # /chat endpoint (AI Q&A)
+│   │   ├── quiz.py                # /quiz endpoint (adaptive quiz)
+│   │   ├── progress.py            # /progress endpoint (analytics)
+│   │   └── _init_.py
+│   ├── models/
+│   │   ├── user_model.py          # MongoDB User schema
+│   │   ├── quiz_model.py          # Quiz schema
+│   │   └── progress_model.py      # Progress schema
+│   ├── services/
+│   │   ├── ai_engine.py           # OpenAI or mock AI logic
+│   │   ├── recommender.py         # Adaptive question selection
+│   │   └── gamification.py        # XP, badges, streaks logic
+│   ├── config.py                  # Environment variables, Mongo URI
+│   ├── database.py                # MongoDB connection via Flask-PyMongo
+│   ├── requirements.txt           # Flask, Flask-PyMongo, openai, etc.
+│   └── README.md
+│
+├── frontend/
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ChatWindow.jsx
+│   │   │   ├── MessageBubble.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Gamification.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   └── Loader.jsx
+│   │   ├── pages/
+│   │   │   ├── ChatPage.jsx
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── LeaderboardPage.jsx
+│   │   │   └── NotFound.jsx
+│   │   ├── utils/
+│   │   │   ├── api.js             # Axios calls to Flask backend
+│   │   │   └── helpers.js
+│   │   ├── App.jsx
+│   │   ├── main.jsx
+│   │   ├── index.css
+│   │   └── tailwind.config.js
+│   ├── package.json
+│   └── README.md
+│
+├── .env.example                   # MONGO_URI, OPENAI_API_KEY
+├── README.md                      # Setup guide + commands
+└── docs/
+    ├── system-architecture.png
+    └── hackathon-plan.md
+
+
+---
+
+🧠 MongoDB Schema Examples
+
+# backend/models/user_model.py
+from flask_pymongo import PyMongo
+
+def init_user_schema(mongo):
+    users = mongo.db.users
+    users.create_index("email", unique=True)
+
+# Example document:
+# {
+#   "name": "Fazil",
+#   "email": "fazil@example.com",
+#   "xp": 150,
+#   "badges": ["Fast Learner"],
+#   "streak": 3
+# }
+
+# backend/models/quiz_model.py
+# Sample quiz structure
+{
+  "user_id": "12345",
+  "topic": "Networking",
+  "difficulty": "medium",
+  "question": "What does TCP stand for?",
+  "answer": "Transmission Control Protocol",
+  "is_correct": True
+}
+
+
+---
+
+🔌 Backend API Endpoints
+
+Endpoint	Method	Description
+
+/chat	POST	Sends user input → returns AI answer
+/quiz	GET	Returns adaptive quiz questions
+/progress	GET/POST	Fetches or updates user analytics
+/leaderboard	GET	Top learners by XP
+
+
+
+---
+
+🎮 Gamification Rules
+
++10 XP per correct answer
+
++50 XP bonus for 5-day streak
+
+Unlock badge every 100 XP
+
+Track streaks and total XP in MongoDB
+
+
+
+---
+
+🧩 System Architecture
+
+User → React Frontend (Chat + Dashboard)
+        ↓
+Flask Backend API (/chat, /quiz, /progress)
+        ↓
+AI Engine (OpenAI / Mock)
+        ↓
+Recommendation Engine
+        ↓
+MongoDB (users, quizzes, progress)
+
+
+---
+
+🕒 24-Hour Hackathon Plan
+
+Time	Task
+
+0–3 hrs	Setup React + Flask + MongoDB connection
+3–8 hrs	Implement chat + OpenAI or mock logic
+8–12 hrs	Add quiz generation + recommendation logic
+12–18 hrs	Gamification (XP, badges, streaks)
+18–24 hrs	Dashboard + charts + deploy (Render + MongoDB Atlas)
+
+
+
+---
+
+🏁 Expected Output
+
+Generate:
+
+Full backend + frontend folder structure
+
+MongoDB schema & connection setup
+
+Flask REST API endpoints
+
+React pages & components
+
+README.md with install + run instructions
+
+Clean, hackathon-ready UI
+
+
+
+---
+
+💬 Tagline
+
+> “Your adaptive AI mentor for every subject — powered by AI and MongoDB.”
